@@ -14,25 +14,40 @@ Flutter [https://flutter.dev/docs/get-started/install]
 
 # Development
 
-Reccomended - Emulator(API level any)
+Reccomended - Emulator(API level 27+)
+
+## Build
+
+Run 
+```
+flutter pub get
+```
+
+Run
+
+```
+flutter pub run build_runner watch --delete-conflicting-outputs
+```
+
+If any errors come up with regards to the dependencies I would have linked to them below in the 
 
 
 <img src="./ddd-architecture-proposal.svg" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
 
 
 
-## Built With
+## Technologies/Dependencies
 
 * [Flutter](http://flutter.dev/) - The web framework used
 * [Freezed](https://pub.dev/packages/freezed) 
 * [Injectable](https://pub.dev/packages/injectable) - Dependency Injection
-* [Firebase](https://circleci.com/) - Backend database
+* [Firebase](https://firebase.google.com/docs/flutter/setup) - Backend database
 
  
 
 ## Further Help
 
-FlutterDevs[FlutterDocs](https://flutter.dev/docs)
+[FlutterDocs](https://flutter.dev/docs)
 
 ## Author
 
