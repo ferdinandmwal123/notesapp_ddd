@@ -72,7 +72,7 @@ abstract class TodoItemDto implements _$TodoItemDto {
     @required bool done,
   }) = _TodoItemDto;
 
-  //converts TodoItem and maps to a TodoItemDto
+  //converts TodoItem and maps to a TodoItemDto 
   factory TodoItemDto.fromDomain(TodoItem todoItem) {
     return TodoItemDto(
         id: todoItem.id.getOrCrash(),
@@ -80,6 +80,7 @@ abstract class TodoItemDto implements _$TodoItemDto {
         done: todoItem.done);
   }
 
+//* Maps to the domain our app can understand
   TodoItem toDomain() {
     return TodoItem(
         id: UniqueId.fromUniqueString(id), name: TodoName(name), done: done);
