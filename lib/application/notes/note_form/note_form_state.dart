@@ -7,7 +7,7 @@ abstract class NoteFormState with _$NoteFormState {
     @required bool showErrorMessages,
     @required bool isEditing,
     @required bool isSaving,
-    @required Option<Either<NoteFailure, Unit>> saveFailureSuccessOption,
+    @required Option<Either<NoteFailure, Unit>> saveFailureOrSuccessOption,
   }) = _NoteFormState;
 
   factory NoteFormState.initial() => NoteFormState(
@@ -15,5 +15,5 @@ abstract class NoteFormState with _$NoteFormState {
       showErrorMessages: false,
       isEditing: false,
       isSaving: false,
-      saveFailureSuccessOption: none());
+      saveFailureOrSuccessOption: none());
 }

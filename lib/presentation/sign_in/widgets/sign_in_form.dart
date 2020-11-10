@@ -1,6 +1,8 @@
-import 'dart:js';
 
+import 'package:auto_route/auto_route.dart';
+import 'package:firebase_ddd_todo/application/auth/auth_bloc.dart';
 import 'package:firebase_ddd_todo/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:firebase_ddd_todo/presentation/routes/router.gr.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,15 +16,17 @@ class SignInForm extends StatelessWidget {
           () {},
           (a) => a.fold((failure) {
             FlushbarHelper.createError(
-                message: failure.map(
-              cancelledByUser: (_) => 'Cancelled',
-              serverError: (_) => 'Server Error',
-              emailAlreadyInUse: (_) => 'Email already in use',
-              invalidEmailAndPasswordCombination: (_) => 'Invalid email and password combination',
-            ),
+              message: failure.map(
+                cancelledByUser: (_) => 'Cancelled',
+                serverError: (_) => 'Server Error',
+                emailAlreadyInUse: (_) => 'Email already in use',
+                invalidEmailAndPasswordCombination: (_) =>
+                    'Invalid email and password combination',
+              ),
             ).show(context);
           }, (_) {
-            // TODO(01): Navigate
+            ExtendedNavigator.of(context).replace(Routes.notesOverviewPage);
+            context.bloc<AuthBloc>().add(const AuthEvent.authCheckRequested());
           }),
         );
       },
@@ -118,14 +122,13 @@ class SignInForm extends StatelessWidget {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
-              if(state.isSubmitting)...[
-                const SizedBox(height:8),
+              if (state.isSubmitting) ...[
+                const SizedBox(height: 8),
                 const LinearProgressIndicator(value: null),
               ]
             ],
           ),
         );
-
       },
     );
   }

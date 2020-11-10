@@ -18,7 +18,7 @@ class NoteRepository implements INoteRepository {
   @override
   Stream<Either<NoteFailure, KtList<Note>>> watchAll() async* {
     final userDoc = await _firestore.userDocument();
-    yield* userDoc.noteCollection
+    yield* userDoc. noteCollection
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map(
@@ -29,36 +29,42 @@ class NoteRepository implements INoteRepository {
           ),
         )
         .onErrorReturnWith((e) {
-      if (e is PlatformException && e.message.contains('PERMISSION DENIED')) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
       } else {
+        // log.error(e.toString());
         return left(const NoteFailure.unexpected());
       }
     });
   }
 
-  @override
+   @override
   Stream<Either<NoteFailure, KtList<Note>>> watchUncompleted() async* {
     final userDoc = await _firestore.userDocument();
     yield* userDoc.noteCollection
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()))
         .map(
-          (notes) => right<NoteFailure, KtList<Note>>(notes
-              .where((note) =>
-                  note.todos.getOrCrash().any((todoItem) => !todoItem.done))
-              .toImmutableList()),
+          (snapshot) =>
+              snapshot.docs.map((doc) => NoteDto.fromFirestore(doc).toDomain()),
+        )
+        .map(
+          (notes) => right<NoteFailure, KtList<Note>>(
+            notes
+                .where((note) =>
+                    note.todos.getOrCrash().any((todoItem) => !todoItem.done))
+                .toImmutableList(),
+          ),
         )
         .onErrorReturnWith((e) {
-      if (e is PlatformException && e.message.contains('PERMISSION DENIED')) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
         return left(const NoteFailure.insufficientPermission());
       } else {
+        // log.error(e.toString());
         return left(const NoteFailure.unexpected());
       }
     });
-  }
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
   @override
   Future<Either<NoteFailure, Unit>> create(Note note) async {
