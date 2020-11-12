@@ -18,7 +18,7 @@ class NoteRepository implements INoteRepository {
   @override
   Stream<Either<NoteFailure, KtList<Note>>> watchAll() async* {
     final userDoc = await _firestore.userDocument();
-    yield* userDoc. noteCollection
+    yield* userDoc.noteCollection
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map(
@@ -38,7 +38,7 @@ class NoteRepository implements INoteRepository {
     });
   }
 
-   @override
+  @override
   Stream<Either<NoteFailure, KtList<Note>>> watchUncompleted() async* {
     final userDoc = await _firestore.userDocument();
     yield* userDoc.noteCollection
@@ -64,7 +64,7 @@ class NoteRepository implements INoteRepository {
         return left(const NoteFailure.unexpected());
       }
     });
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+  }
 
   @override
   Future<Either<NoteFailure, Unit>> create(Note note) async {
@@ -83,8 +83,6 @@ class NoteRepository implements INoteRepository {
       }
     }
   }
-
-  
 
   @override
   Future<Either<NoteFailure, Unit>> update(Note note) async {
@@ -105,9 +103,10 @@ class NoteRepository implements INoteRepository {
       }
     }
   }
+
   @override
-  Future<Either<NoteFailure, Unit>> delete(Note note) async{
-   try {
+  Future<Either<NoteFailure, Unit>> delete(Note note) async {
+    try {
       final userDoc = await _firestore.userDocument();
       final noteId = note.id.getOrCrash();
 

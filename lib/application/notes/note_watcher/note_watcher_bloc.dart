@@ -45,14 +45,15 @@ class NoteWatcherBloc extends Bloc<NoteWatcherEvent, NoteWatcherState> {
         yield e.failureOrNotes.fold(
           (f) => NoteWatcherState.loadFailure(f),
           (notes) => NoteWatcherState.loadSuccess(notes),
+        
         );
       },
     );
   }
+
   @override
   Future<void> close() async {
-  await _noteStreamSubscription?.cancel();
+    await _noteStreamSubscription?.cancel();
     return super.close();
   }
-  
 }
