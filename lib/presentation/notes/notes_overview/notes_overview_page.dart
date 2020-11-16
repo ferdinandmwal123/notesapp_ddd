@@ -4,6 +4,7 @@ import 'package:firebase_ddd_todo/application/notes/note_actor/note_actor_bloc.d
 import 'package:firebase_ddd_todo/application/notes/note_watcher/note_watcher_bloc.dart';
 import 'package:firebase_ddd_todo/presentation/injection.dart';
 import 'package:firebase_ddd_todo/presentation/notes/notes_overview/widgets/notes_overview_body_widget.dart';
+import 'package:firebase_ddd_todo/presentation/notes/notes_overview/widgets/uncompleted_switch.dart';
 import 'package:firebase_ddd_todo/presentation/routes/router.gr.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
@@ -59,16 +60,18 @@ class NotesOverviewPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.exit_to_app),
               onPressed: () {
-                context.bloc<AuthBloc>().add(const AuthEvent.signedOut());
+                // context.bloc<AuthBloc>().add(const AuthEvent.signedOut());
+                context.read<AuthBloc>().add(const AuthEvent.signedOut());
               },
             ),
             actions: <Widget>[
-              // UncompletedSwitch(),
+              UncompletedSwitch(),
             ],
           ),
           body: NotesOverviewBody(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              ExtendedNavigator.of(context).pushNoteFormPage(editedNote: null);
             },
             child: const Icon(Icons.add),
           ),

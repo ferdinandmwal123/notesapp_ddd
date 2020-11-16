@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_ddd_todo/application/auth/auth_bloc.dart';
 import 'package:firebase_ddd_todo/application/auth/sign_in_form/sign_in_form_bloc.dart';
@@ -26,7 +25,9 @@ class SignInForm extends StatelessWidget {
             ).show(context);
           }, (_) {
             ExtendedNavigator.of(context).replace(Routes.notesOverviewPage);
-            context.bloc<AuthBloc>().add(const AuthEvent.authCheckRequested());
+            //!DEPRECATED
+            // context.bloc<AuthBloc>().add(const AuthEvent.authCheckRequested());
+            context.read<AuthBloc>().add(const AuthEvent.authCheckRequested());
           }),
         );
       },
