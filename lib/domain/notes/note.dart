@@ -40,3 +40,4 @@ abstract class Note implements _$Note {
         .fold((l) => some(l), (r) => none());
   }
 }
+
