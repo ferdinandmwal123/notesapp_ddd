@@ -9,7 +9,7 @@ This project was generated with [Flutter](https://flutter.dev/)
 What things you need to install the software and how to install them
 
 ```
-[Flutter] (https://flutter.dev/docs/get-started/install)
+Flutter
 ```
 
 # Development
