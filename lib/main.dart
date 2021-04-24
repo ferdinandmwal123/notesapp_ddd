@@ -10,3 +10,17 @@ void main() async{
   configureInjection(Environment.prod);
   runApp(AppWidget());
 }
+class X extends StatefulWidget {
+  @override
+  _XState createState() => _XState();
+}
+
+class _XState extends State<X> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+    
+    );
+  }
+}
+
